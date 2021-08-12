@@ -6,19 +6,18 @@ public class ErroNegocialException  extends Exception{
     private String classe;
     private String support;
 
-    protected  ErroNegocialException() {}
+    public  ErroNegocialException() {
+        super();
+    }
 
     public ErroNegocialException(String message, String cause) {
         this.message = message;
         this.cause = cause;
-        //this.classe = classe;
-        //  this.nextActions = nextActions;
-        // this.support = support;
     }
 
-//    public ErroNegocialException(EnumMensagensErro mensagensErro){
-//        super(mensagensErro.getMensagem());
-//    }
+    public ErroNegocialException(EnumMensagensErro mensagensErro){
+        super(mensagensErro.getMensagem());
+    }
 
     public ErroNegocialException(String message) {
         super(message) ;

@@ -27,7 +27,7 @@ public class VeiculoDTO {
     private long idMarca;
 
     @JsonProperty("id_modelo")
-    @NotNull
-    private long idModelo;
+    @NotBlank
+    private String idModelo;
 
 }
