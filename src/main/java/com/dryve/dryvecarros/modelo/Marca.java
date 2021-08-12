@@ -2,15 +2,13 @@ package com.dryve.dryvecarros.modelo;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 @Getter
 @Setter
@@ -21,9 +19,14 @@ public class Marca implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 6093975916559642789L;
-	
-	@EmbeddedId
-	private  MarcaId id;
+	@Id
+	@Column(name = "id",  updatable = false,  nullable = false)
+	@Type(type = "uuid-char")
+	private UUID id = UUID.randomUUID();
+
+	@Column(name = "fipe_id")
+	private Long fipeId;
+
 	@Column(name = "name")
 	private String nome;
 	

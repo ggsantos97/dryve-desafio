@@ -17,7 +17,7 @@ public class VeiculoService implements IVeiculoService{
     @Autowired
     VeiculoRepository repository;
     @Override
-    public VeiculoResponseDTO salvar(VeiculoDTO dto) throws ErroNegocialException {
+    public VeiculoResponseDTO salva(VeiculoDTO dto) throws ErroNegocialException {
         //validaVeiculoNaBase(dto.getPlaca());
 
         return new VeiculoResponseDTO();

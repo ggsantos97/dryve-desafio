@@ -6,5 +6,5 @@ import com.dryve.dryvecarros.exception.ErroNegocialException;
 
 public interface IVeiculoService {
 
-    VeiculoResponseDTO salvar(VeiculoDTO dto) throws ErroNegocialException;
+    VeiculoResponseDTO salva(VeiculoDTO dto) throws ErroNegocialException;
 }

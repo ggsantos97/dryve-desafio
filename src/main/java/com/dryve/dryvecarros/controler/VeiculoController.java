@@ -36,7 +36,7 @@ public class VeiculoController {
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public ResponseEntity<VeiculoResponseDTO> buscaVeiculo(@RequestBody @Valid VeiculoDTO dto) throws ErroNegocialException {
-		VeiculoResponseDTO response = service.salvar(dto);
+		VeiculoResponseDTO response = service.salva(dto);
 		return new ResponseEntity<VeiculoResponseDTO>(response, HttpStatus.CREATED);
 	}
 

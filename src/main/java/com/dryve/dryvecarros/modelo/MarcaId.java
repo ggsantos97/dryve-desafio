@@ -10,10 +10,10 @@ import javax.persistence.GenerationType;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 @Getter
 @Setter
-@Embeddable
 public class MarcaId  implements Serializable {
 
 	/**
@@ -21,10 +21,6 @@ public class MarcaId  implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", updatable = false, unique = true, nullable = false)
-	private  UUID id;
-	
-	@Column(name = "fipe_id")
-	private Long fipeId;
+
+
 }

@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 @Getter
 @Setter
@@ -30,7 +31,8 @@ public class Veiculo implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", updatable = false, unique = true, nullable = false)
+	@Type(type = "uuid-char")
+	@Column(name = "id", updatable = false,  nullable = false)
 	private  UUID id;
 	
 	@Column(unique = true)
