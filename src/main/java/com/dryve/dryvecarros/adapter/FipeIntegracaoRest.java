@@ -1,13 +1,11 @@
 package com.dryve.dryvecarros.adapter;
 
-import com.dryve.dryvecarros.exception.EnumMensagensErro;
 import com.dryve.dryvecarros.exception.ErroNegocialException;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
-import java.text.Bidi;
 
 @Service
 public class FipeIntegracaoRest {
@@ -21,7 +19,7 @@ public class FipeIntegracaoRest {
                Object o = restTemplate.getForObject(URL_FIPE+idMarca+"/"+idModelo+"/"+ano + FORMATO_JSON, Object.class);
             return convertStringJsonToBigDecimal(o);
            } catch (Exception ex){
-                throw new ErroNegocialException(EnumMensagensErro.ERRO_AO_CONSULTAR_API_FIPE);
+                throw new ErroNegocialException("EnumMensagensErro.ERRO_AO_CONSULTAR_API_FIPE");
            }
         }
 

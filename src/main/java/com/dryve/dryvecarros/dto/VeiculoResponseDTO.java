@@ -24,5 +24,5 @@ public class VeiculoResponseDTO {
 		@JsonProperty("data_cadastro")
 		private LocalDate dataCadastro; 
 		private String modelo;
-		private String Marca;		
+		private String marca;
 }

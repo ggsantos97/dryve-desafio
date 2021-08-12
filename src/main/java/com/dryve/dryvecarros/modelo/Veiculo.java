@@ -13,15 +13,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.apache.tomcat.jni.Local;
 import org.hibernate.annotations.Type;
 
 @Getter
 @Setter
 @Builder
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Veiculo implements Serializable{
 
 	/**
@@ -42,15 +43,15 @@ public class Veiculo implements Serializable{
 	private BigDecimal  precoFipe;
 	
 	@Column
-	private BigDecimal  precoAnucio;
+	private BigDecimal  precoAnuncio;
 	
 	@Column
 	private int ano;
 	
 	@Column
-	private LocalDate  dataCadastro;
+	private LocalDate  dataCadastro = LocalDate.now();
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Modelo modelo;
 	
 }

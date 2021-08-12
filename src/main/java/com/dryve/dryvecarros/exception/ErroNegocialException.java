@@ -16,9 +16,9 @@ public class ErroNegocialException  extends Exception{
         // this.support = support;
     }
 
-    public ErroNegocialException(EnumMensagensErro mensagensErro){
-        super(mensagensErro.getMensagem());
-    }
+//    public ErroNegocialException(EnumMensagensErro mensagensErro){
+//        super(mensagensErro.getMensagem());
+//    }
 
     public ErroNegocialException(String message) {
         super(message) ;
