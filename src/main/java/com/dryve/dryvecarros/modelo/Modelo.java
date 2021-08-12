@@ -1,4 +1,4 @@
-package com.dryve.dryvecarros.domain;
+package com.dryve.dryvecarros.modelo;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,8 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
-import org.hibernate.annotations.ManyToAny;
 
 import lombok.Getter;
 import lombok.Setter;

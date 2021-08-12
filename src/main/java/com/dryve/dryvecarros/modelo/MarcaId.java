@@ -1,4 +1,4 @@
-package com.dryve.dryvecarros.domain;
+package com.dryve.dryvecarros.modelo;
 
 import java.io.Serializable;
 import java.util.UUID;

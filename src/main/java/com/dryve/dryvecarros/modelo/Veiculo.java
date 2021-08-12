@@ -1,4 +1,4 @@
-package com.dryve.dryvecarros.domain;
+package com.dryve.dryvecarros.modelo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -13,11 +13,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Builder
 @Entity
 public class Veiculo implements Serializable{
 
@@ -36,6 +38,9 @@ public class Veiculo implements Serializable{
 	
 	@Column
 	private BigDecimal  precoFipe;
+	
+	@Column
+	private BigDecimal  precoAnucio;
 	
 	@Column
 	private int ano;
