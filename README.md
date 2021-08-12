@@ -1,0 +1,1 @@
+## 1º execute o comando docker-compose up para subir as dependencias do projeto
