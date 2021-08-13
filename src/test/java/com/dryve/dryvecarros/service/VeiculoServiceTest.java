@@ -38,12 +38,10 @@ public class VeiculoServiceTest {
     @Test
     @Order(1)
     public void deveSalvarUmVeiculo() throws ErroNegocialException {
-//        when(modeloService.buscaModeloPorFipeId(anyString()))
-//                .thenReturn(ModeloBuilder.umModelo());
+        doReturn(ModeloBuilder.umModelo()).when(modeloService).buscaModeloPorFipeId(anyString());
         doReturn(VeiculoBuilder.umVeiculoResponseDTO()).when(mapper).toResponseDTO(any(Veiculo.class));
         when(repository.save(any(Veiculo.class))).thenReturn(VeiculoBuilder.umVeiculo());
         VeiculoResponseDTO resultado = service.salva(VeiculoBuilder.umVeiculoDTO());
-
         Assertions.assertNotNull(resultado.getAno());
     }
 
