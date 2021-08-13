@@ -11,7 +11,8 @@ public enum EnumMensagensErro {
 
     ERRO_AO_CONSULTAR_API_FIPE("001", "Erro ao tentar se comunicar com http://fipeapi.appspot.com/"),
     VEICULO_CADASTRADO_NA_BASE("002","Veiculo já está cadastrado na base de dados!"),
-    MODELO_NAO_EXISTE("003","Este Modelo não existe na base de dados!");
+    VEICULO_NAO_ENCONTRADO("003","Veiculo não está cadastrado "),
+    MODELO_NAO_EXISTE("004","Este Modelo não existe na base de dados!");
     private String  codigo;
     private String  mensagem;
 

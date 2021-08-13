@@ -17,9 +17,7 @@ import com.dryve.dryvecarros.modelo.Veiculo;
 public interface VeiculoRepository extends JpaRepository<Veiculo, UUID>{
 			
 	Optional<Veiculo> findByPlaca(String placa);
-	@Query(value = "select v from Veiculo v inner join v.modelo m where m.marca.fipeId= :idMarca ORDER BY v.id",
-	countQuery = "SELECT count(*) from Veiculo ",
-	nativeQuery = true)
+	@Query(value = "select v from Veiculo v inner join v.modelo m where m.marca.fipeId= :idMarca ")
 	Page<Veiculo> selectByIdMarcaAndPage(@Param("idMarca") Long idMarca, Pageable page);
 
 	@Query(value="SELECT v from Veiculo v inner join v.modelo m where m.marca.fipeId = :idMarca")

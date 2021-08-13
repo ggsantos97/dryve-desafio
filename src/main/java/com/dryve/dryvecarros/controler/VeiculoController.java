@@ -4,7 +4,6 @@ import com.dryve.dryvecarros.adapter.FipeIntegracaoRest;
 import com.dryve.dryvecarros.dto.VeiculoDTO;
 import com.dryve.dryvecarros.dto.VeiculoResponseDTO;
 import com.dryve.dryvecarros.exception.ErroNegocialException;
-import com.dryve.dryvecarros.modelo.Veiculo;
 import com.dryve.dryvecarros.service.IVeiculoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -36,7 +35,7 @@ public class VeiculoController {
 	@GetMapping(path = "/paginado")
 	@ResponseBody
 	public ResponseEntity<Page<VeiculoResponseDTO>> buscaTodosPorMarca(@RequestParam Long idMarca, @PageableDefault(value = 10, page = 0) Pageable pageable) throws ErroNegocialException {
-	return ResponseEntity.ok(service.listaVeiculosPorMarca(idMarca, pageable));
+		return ResponseEntity.ok(service.listaVeiculosPorMarca(idMarca, pageable));
 	}
 	
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -44,6 +43,11 @@ public class VeiculoController {
 	public ResponseEntity<VeiculoResponseDTO> buscaVeiculo(@RequestBody @Valid VeiculoDTO dto) throws ErroNegocialException {
 		VeiculoResponseDTO response = service.salva(dto);
 		return new ResponseEntity<VeiculoResponseDTO>(response, HttpStatus.CREATED);
+	}
+
+	@PutMapping(path = "{placa}")
+	public ResponseEntity<VeiculoResponseDTO> atualizaParcilmente(@PathVariable String placa, @RequestBody VeiculoDTO dto) throws ErroNegocialException {
+		return ResponseEntity.ok(service.atualiza(dto, placa));
 	}
 
 }

@@ -5,6 +5,7 @@ import com.dryve.dryvecarros.dto.VeiculoResponseDTO;
 import com.dryve.dryvecarros.modelo.Veiculo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 
 @Mapper(componentModel = "spring")
@@ -21,4 +22,6 @@ public interface VeiculoMapper {
             @Mapping(target = "marca", source = "entity.modelo.marca.nome"),
     })
     VeiculoResponseDTO toResponseDTO(Veiculo entity);
+
+    Veiculo toEntityUpdate(VeiculoDTO dto, @MappingTarget Veiculo entity);
 }

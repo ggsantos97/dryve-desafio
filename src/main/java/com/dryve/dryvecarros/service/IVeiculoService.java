@@ -12,4 +12,5 @@ public interface IVeiculoService {
      void validaVeiculoNaBase(String placa) throws ErroNegocialException;
      VeiculoResponseDTO buscaPorPlaca(String placa) throws ErroNegocialException;
      Page<VeiculoResponseDTO> listaVeiculosPorMarca(Long idMarca, Pageable pageable) throws ErroNegocialException;
+     VeiculoResponseDTO atualiza(VeiculoDTO dto, String placa) throws ErroNegocialException;
 }

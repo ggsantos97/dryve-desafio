@@ -43,7 +43,8 @@ public class VeiculoService implements IVeiculoService{
 
     @Override
     public VeiculoResponseDTO buscaPorPlaca(String placa) throws ErroNegocialException {
-        Optional<Veiculo> optionalVeiculo = veiculoRepository.findByPlaca(placa);
+        Optional<Veiculo> optionalVeiculo = Optional.ofNullable(veiculoRepository.findByPlaca(placa)
+                .orElseThrow(() -> new ErroNegocialException(EnumMensagensErro.VEICULO_NAO_ENCONTRADO)));
         return mapper.toResponseDTO(optionalVeiculo.get());
     }
 
@@ -52,8 +53,14 @@ public class VeiculoService implements IVeiculoService{
         Page<VeiculoResponseDTO> veiculos = veiculoRepository.selectByIdMarcaAndPage(idMarca, pageable).map(
                 v -> mapper.toResponseDTO(v)
         );
-        //List<Veiculo> veiculos = veiculoRepository.listaTeste(idMarca);
         return veiculos;
+    }
+
+    @Override
+    public VeiculoResponseDTO atualiza(VeiculoDTO dto, String placa) throws ErroNegocialException {
+        Optional<Veiculo> optionalVeiculo = Optional.ofNullable(veiculoRepository.findByPlaca(placa)
+                .orElseThrow(()-> new ErroNegocialException(EnumMensagensErro.VEICULO_NAO_ENCONTRADO)));
+        return mapper.toResponseDTO(veiculoRepository.save(mapper.toEntityUpdate(dto, optionalVeiculo.get()))) ;
     }
 
 
