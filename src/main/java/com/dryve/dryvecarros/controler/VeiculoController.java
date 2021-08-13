@@ -9,6 +9,7 @@ import com.dryve.dryvecarros.service.IVeiculoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,12 @@ public class VeiculoController {
 	@ResponseBody
 	public ResponseEntity<VeiculoResponseDTO> buscaVeiculoPorPlaca(@RequestParam String placa) throws ErroNegocialException {
 		return new ResponseEntity<VeiculoResponseDTO>(service.buscaPorPlaca(placa), HttpStatus.OK);
+	}
+	
+	@GetMapping(path = "/paginado")
+	@ResponseBody
+	public ResponseEntity<Page<VeiculoResponseDTO>> buscaTodosPorMarca(@RequestParam Long idMarca, @PageableDefault(value = 10, page = 0) Pageable pageable) throws ErroNegocialException {
+	return ResponseEntity.ok(service.listaVeiculosPorMarca(idMarca, pageable));
 	}
 	
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
