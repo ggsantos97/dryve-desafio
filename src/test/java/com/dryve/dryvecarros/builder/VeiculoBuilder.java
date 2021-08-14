@@ -23,10 +23,10 @@ public class VeiculoBuilder {
 
     public static VeiculoDTO umVeiculoDTO(){
         return VeiculoDTO.builder()
-                .ano("2020-5")
-                .idModelo("4430")
+                .ano("2005-1")
+                .idModelo("940")
                 .idarca(23)
-                .placa("PBC-8827")
+                .placa("JGI0151")
                 .precoAnuncio(BigDecimal.valueOf(55.000))
                 .build();
     }
