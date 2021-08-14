@@ -55,5 +55,5 @@ public class Modelo implements Serializable {
 	private Marca marca;
 
 	@OneToMany(mappedBy = "modelo", cascade = CascadeType.ALL, orphanRemoval = true)
-	private  List<Veiculo> veiculo;
+	private  List<Veiculo> veiculos;
 }

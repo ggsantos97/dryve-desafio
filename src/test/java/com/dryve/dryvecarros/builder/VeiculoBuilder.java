@@ -16,8 +16,8 @@ public class VeiculoBuilder {
                 .ano("2020-5")
                 .modelo(new Modelo())
                 .placa("PBC-8827")
-                .precoAnuncio(BigDecimal.valueOf(55.000))
-                .precoFipe(BigDecimal.valueOf(52.000))
+                .precoAnuncio(BigDecimal.valueOf(55000L))
+                .precoFipe(BigDecimal.valueOf(52000L))
                 .build();
     }
 
@@ -26,8 +26,18 @@ public class VeiculoBuilder {
                 .ano("2005-1")
                 .idModelo("940")
                 .idarca(23)
-                .placa("JGI0151")
-                .precoAnuncio(BigDecimal.valueOf(55.000))
+                .placa("PBC-8827")
+                .precoAnuncio(BigDecimal.valueOf(55000L))
+                .build();
+    }
+    
+    public static VeiculoDTO umVeiculoDTOUpdate(){
+        return VeiculoDTO.builder()
+                .ano("2005-1")
+                .idModelo("940")
+                .idarca(23)
+                .placa("PBC-2418")
+                .precoAnuncio(BigDecimal.valueOf(55000L))
                 .build();
     }
 
@@ -37,7 +47,7 @@ public class VeiculoBuilder {
                 .dataCadastro(LocalDate.now())
                 .marca("VW")
                 .placa("PBC-8827")
-                .precoAnuncio(BigDecimal.valueOf(55.000))
+                .precoAnuncio(BigDecimal.valueOf(55000L))
                 .build();
     }
 

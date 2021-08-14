@@ -16,6 +16,7 @@ import com.dryve.dryvecarros.dto.VeiculoDTO;
 import com.dryve.dryvecarros.dto.VeiculoResponseDTO;
 import com.dryve.dryvecarros.exception.EnumMensagensErro;
 import com.dryve.dryvecarros.exception.ErroNegocialException;
+import com.dryve.dryvecarros.exception.ObjetoNaoEncontradoException;
 import com.dryve.dryvecarros.mapper.VeiculoMapper;
 import com.dryve.dryvecarros.modelo.Veiculo;
 import com.dryve.dryvecarros.repository.VeiculoRepository;
@@ -54,7 +55,7 @@ public class VeiculoService implements IVeiculoService{
     		 Gson gson = new Gson();
 			rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME,"", gson.toJson(dto));
 		} catch (AmqpException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage()); 
 		}
     }
 
@@ -66,9 +67,9 @@ public class VeiculoService implements IVeiculoService{
     }
 
     @Override
-    public VeiculoResponseDTO buscaPorPlaca(String placa) throws ErroNegocialException {
+    public VeiculoResponseDTO buscaPorPlaca(String placa) throws ObjetoNaoEncontradoException {
         Optional<Veiculo> optionalVeiculo = Optional.ofNullable(veiculoRepository.findByPlaca(placa)
-                .orElseThrow(() -> new ErroNegocialException(EnumMensagensErro.VEICULO_NAO_ENCONTRADO)));
+                .orElseThrow(() -> new ObjetoNaoEncontradoException(EnumMensagensErro.VEICULO_NAO_ENCONTRADO)));
         return mapper.toResponseDTO(optionalVeiculo.get());
     }
 
@@ -81,9 +82,9 @@ public class VeiculoService implements IVeiculoService{
     }
 
     @Override
-    public VeiculoResponseDTO atualiza(VeiculoDTO dto, String placa) throws ErroNegocialException {
+    public VeiculoResponseDTO atualiza(VeiculoDTO dto, String placa) throws ObjetoNaoEncontradoException {
         Optional<Veiculo> optionalVeiculo = Optional.ofNullable(veiculoRepository.findByPlaca(placa)
-                .orElseThrow(()-> new ErroNegocialException(EnumMensagensErro.VEICULO_NAO_ENCONTRADO)));
+                .orElseThrow(()-> new ObjetoNaoEncontradoException(EnumMensagensErro.VEICULO_NAO_ENCONTRADO)));
         return mapper.toResponseDTO(veiculoRepository.save(mapper.toEntityUpdate(dto, optionalVeiculo.get()))) ;
     }
 

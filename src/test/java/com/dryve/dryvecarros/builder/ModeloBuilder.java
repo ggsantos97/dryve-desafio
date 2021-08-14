@@ -14,7 +14,7 @@ public class ModeloBuilder {
      .id(UUID.randomUUID())
      .marca(new Marca())
      .nome("BWM me competition")
-     .veiculo(Collections.singletonList(VeiculoBuilder.umVeiculo()))
+     .veiculos(Collections.singletonList(VeiculoBuilder.umVeiculo()))
      .build();
     }
 }
