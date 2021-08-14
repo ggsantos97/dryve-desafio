@@ -1,39 +1,41 @@
 package com.dryve.dryvecarros.service;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.when;
+
+import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.Optional;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Spy;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+
+import com.dryve.dryvecarros.adapter.FipeIntegracaoRest;
 import com.dryve.dryvecarros.builder.ModeloBuilder;
 import com.dryve.dryvecarros.builder.VeiculoBuilder;
+import com.dryve.dryvecarros.config.RabbitMQConfig;
 import com.dryve.dryvecarros.dto.VeiculoDTO;
 import com.dryve.dryvecarros.dto.VeiculoResponseDTO;
 import com.dryve.dryvecarros.exception.EnumMensagensErro;
 import com.dryve.dryvecarros.exception.ErroNegocialException;
 import com.dryve.dryvecarros.mapper.VeiculoMapperImpl;
-import com.dryve.dryvecarros.modelo.Modelo;
 import com.dryve.dryvecarros.modelo.Veiculo;
 import com.dryve.dryvecarros.repository.VeiculoRepository;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.provider.EnumSource;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import static org.mockito.Mockito.*;
-
-import org.mockito.Mockito;
-import org.mockito.Spy;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
-
-import java.util.Collections;
-import java.util.Optional;
-
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.doNothing;
 
 @SpringBootTest
-//@RunWith(SpringRunner.class)
 public class VeiculoServiceTest {
 
     @Mock
@@ -42,6 +44,10 @@ public class VeiculoServiceTest {
     ModeloService modeloService;
     @Spy
     VeiculoMapperImpl mapper;
+    @Spy
+    FipeIntegracaoRest integracaoFipe;
+    @Mock
+    RabbitTemplate rabbitTemplate;
 
     @InjectMocks
     VeiculoService service;
@@ -52,9 +58,13 @@ public class VeiculoServiceTest {
         doReturn(ModeloBuilder.umModelo()).when(modeloService).buscaModeloPorFipeId(anyString());
         doReturn(VeiculoBuilder.umVeiculoResponseDTO()).when(mapper).toResponseDTO(any(Veiculo.class));
         when(repository.save(any(Veiculo.class))).thenReturn(VeiculoBuilder.umVeiculo());
+        doReturn(BigDecimal.valueOf(150L)).when(integracaoFipe).consultaPrecoFipe(anyString(), anyString(), anyString());
+        //doNothing().when(rabbitTemplate).convertAndSend(anyString(),"", anyString());
+       
         VeiculoResponseDTO resultado = service.salva(VeiculoBuilder.umVeiculoDTO());
+       
         Assertions.assertNotNull(resultado.getAno());
-       // Mockito.verify(service, Mockito.times(1)).salva(VeiculoBuilder.umVeiculoDTO());
+       
     }
 
     @Test

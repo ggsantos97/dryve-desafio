@@ -45,11 +45,11 @@ public class VeiculoService implements IVeiculoService{
         entity.setPrecoFipe(fipeIntegracaoRest.consultaPrecoFipe(String.valueOf(dto.getIdarca()), dto.getIdModelo(), dto.getAno()));
         entity.setModelo(modeloService.buscaModeloPorFipeId(dto.getIdModelo()));
         VeiculoResponseDTO retorno = mapper.toResponseDTO(veiculoRepository.save(entity));
-        enviaMensagemRabbitMQ(retorno);
+        enviaBroadCastRabbitMQ(retorno);
            return retorno ;
     }
     
-    private void enviaMensagemRabbitMQ(VeiculoResponseDTO dto) {
+    private void enviaBroadCastRabbitMQ(VeiculoResponseDTO dto) {
     	try {
     		 Gson gson = new Gson();
 			rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME,"", gson.toJson(dto));
