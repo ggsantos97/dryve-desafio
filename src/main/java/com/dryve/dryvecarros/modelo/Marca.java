@@ -13,7 +13,7 @@ import org.hibernate.annotations.Type;
 @Getter
 @Setter
 @Entity
-@Table(name = "marca")
+@Table(name = "marca", schema="public")
 public class Marca implements Serializable{
 
 	/**

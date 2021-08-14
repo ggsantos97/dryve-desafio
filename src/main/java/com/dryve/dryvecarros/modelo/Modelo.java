@@ -28,7 +28,7 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "modelo")
+@Table(name = "modelo",  schema="public")
 public class Modelo implements Serializable {
 
 
