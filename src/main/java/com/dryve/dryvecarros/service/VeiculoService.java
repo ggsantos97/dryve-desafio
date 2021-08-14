@@ -1,5 +1,6 @@
 package com.dryve.dryvecarros.service;
 
+import com.dryve.dryvecarros.adapter.FipeIntegracaoRest;
 import com.dryve.dryvecarros.dto.VeiculoDTO;
 import com.dryve.dryvecarros.dto.VeiculoResponseDTO;
 import com.dryve.dryvecarros.exception.EnumMensagensErro;
@@ -19,20 +20,25 @@ import java.util.Optional;
 public class VeiculoService implements IVeiculoService{
 
     @Autowired
-    VeiculoRepository veiculoRepository;
+    private VeiculoRepository veiculoRepository;
     @Autowired
-    IModeloService modeloService;
+    private IModeloService modeloService;
     @Autowired
-    VeiculoMapper mapper;
+    private VeiculoMapper mapper;
+    
+    @Autowired
+    private FipeIntegracaoRest fipeIntegracaoRest;
 
     @Override
     public VeiculoResponseDTO salva(VeiculoDTO dto) throws ErroNegocialException {
         validaVeiculoNaBase(dto.getPlaca());
         Veiculo entity = mapper.toEntity(dto);
         entity.setDataCadastro(LocalDate.now());
+        entity.setPrecoFipe(fipeIntegracaoRest.consultaPrecoFipe(String.valueOf(dto.getIdarca()), dto.getIdModelo(), dto.getAno()));
         entity.setModelo(modeloService.buscaModeloPorFipeId(dto.getIdModelo()));
            return mapper.toResponseDTO(veiculoRepository.save(entity)) ;
     }
+    
 
     public void validaVeiculoNaBase(String placa) throws ErroNegocialException {
         Optional<Veiculo> veiculoOptional = veiculoRepository.findByPlaca(placa);

@@ -11,11 +11,17 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-import lombok.*;
-import org.apache.tomcat.jni.Local;
 import org.hibernate.annotations.Type;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -23,6 +29,7 @@ import org.hibernate.annotations.Type;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "veiculo")
 public class Veiculo implements Serializable{
 
 	/**
@@ -46,12 +53,13 @@ public class Veiculo implements Serializable{
 	private BigDecimal  precoAnuncio;
 	
 	@Column
-	private int ano;
+	private String ano;
 	
 	@Column
 	private LocalDate  dataCadastro = LocalDate.now();
 	
 	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "modelo_id", referencedColumnName = "id")
 	private Modelo modelo;
 	
 }

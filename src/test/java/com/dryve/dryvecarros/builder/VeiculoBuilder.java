@@ -13,7 +13,7 @@ public class VeiculoBuilder {
     public static Veiculo umVeiculo(){
         return Veiculo.builder()
                 .dataCadastro(LocalDate.now())
-                .ano(2020)
+                .ano("2020-5")
                 .modelo(new Modelo())
                 .placa("PBC-8827")
                 .precoAnuncio(BigDecimal.valueOf(55.000))
@@ -23,7 +23,7 @@ public class VeiculoBuilder {
 
     public static VeiculoDTO umVeiculoDTO(){
         return VeiculoDTO.builder()
-                .ano(2020)
+                .ano("2020-5")
                 .idModelo("4430")
                 .idarca(23)
                 .placa("PBC-8827")
@@ -33,7 +33,7 @@ public class VeiculoBuilder {
 
     public static VeiculoResponseDTO umVeiculoResponseDTO(){
         return VeiculoResponseDTO.builder()
-                .ano(2020)
+                .ano("2020-5")
                 .dataCadastro(LocalDate.now())
                 .marca("VW")
                 .placa("PBC-8827")

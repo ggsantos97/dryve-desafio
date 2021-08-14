@@ -23,8 +23,6 @@ public class VeiculoController {
 	@Autowired
 	private IVeiculoService service;
 
-	@Autowired
-	FipeIntegracaoRest fipeIntegracaoRest;
 	
 	@GetMapping()
 	@ResponseBody

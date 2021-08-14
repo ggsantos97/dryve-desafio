@@ -18,7 +18,7 @@ public class VeiculoDTO {
     private String placa;
     @JsonProperty("preco_anuncio")
     private BigDecimal precoAnuncio;
-    private int ano;
+    private String ano;
 //    @JsonProperty("preco_fipe")
 //    private BigDecimal precoFipe;
 
