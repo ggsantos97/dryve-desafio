@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -66,6 +67,7 @@ public class VeiculoService implements IVeiculoService{
         }
     }
 
+    @Cacheable(cacheNames = VeiculoDTO.CACHE_NAME, key = "#root.method.name")
     @Override
     public VeiculoResponseDTO buscaPorPlaca(String placa) throws ObjetoNaoEncontradoException {
         Optional<Veiculo> optionalVeiculo = Optional.ofNullable(veiculoRepository.findByPlaca(placa)

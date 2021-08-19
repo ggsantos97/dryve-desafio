@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Setter
@@ -12,7 +13,9 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class VeiculoDTO {
+public class VeiculoDTO implements Serializable {
+
+    public static final String CACHE_NAME = "VeiculoCache";
 
     @NotBlank
     private String placa;

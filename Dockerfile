@@ -1,4 +1,3 @@
 FROM openjdk:8
-MAINTAINER github.com/trevoogustavo
-COPY target/dryve-carros-0.0.1-SNAPSHOT.jar api.jar
-ENTRYPOINT ["java","-jar","/api.jar"]
+COPY target/dryve-carros-0.0.1-SNAPSHOT.jar api-server.jar
+ENTRYPOINT ["java", "-Dspring.profiles.active=docker", "-jar","/api-server.jar"]
