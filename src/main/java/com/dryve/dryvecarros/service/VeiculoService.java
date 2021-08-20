@@ -67,7 +67,7 @@ public class VeiculoService implements IVeiculoService{
         }
     }
 
-    @Cacheable(cacheNames = VeiculoDTO.CACHE_NAME, key = "#root.method.name")
+    //@Cacheable("veiculo")
     @Override
     public VeiculoResponseDTO buscaPorPlaca(String placa) throws ObjetoNaoEncontradoException {
         Optional<Veiculo> optionalVeiculo = Optional.ofNullable(veiculoRepository.findByPlaca(placa)
@@ -75,6 +75,7 @@ public class VeiculoService implements IVeiculoService{
         return mapper.toResponseDTO(optionalVeiculo.get());
     }
 
+    //@Cacheable("veiculos-page")
     @Override
     public Page<VeiculoResponseDTO> listaVeiculosPorMarca(Long idMarca, Pageable pageable) throws ErroNegocialException {
         Page<VeiculoResponseDTO> veiculos = veiculoRepository.selectByIdMarcaAndPage(idMarca, pageable).map(
