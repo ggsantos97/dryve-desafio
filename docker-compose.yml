@@ -1,0 +1,36 @@
+version: "3"
+
+
+services:
+  redis:
+    image: redis
+    container_name: "redis_container"
+    command: redis-server
+    ports:
+      - "6379:6379"
+  postgres:
+    image: "postgres:11"
+    container_name: "postgres_container"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres_db
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+  rabbit:
+    container_name: "rabbit_container"
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+volumes:
+  dbdata:
